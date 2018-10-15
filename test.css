@@ -1,0 +1,36 @@
+.display-info{
+    width: 972px;
+    height: 383px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+    background-color: #ffffff;
+    font-family: ProximaNova;
+    .info-table{
+        width: 940px;
+        height: 170px;
+        background-color: #f5f5f5;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0px;
+        text-align: left;
+        color: #4a4a4a;
+
+        table-layout:fixed;
+        .general{
+            max-width: 50px;
+            font-size: 12px;
+        }
+        .href{
+            width: 50px;
+            max-width: 50px;
+            height: 42px;
+        }
+    }
+    .change-table{
+        width: 940px;
+        height: 170px;
+        background-color: #f5f5f5;
+        table-layout:fixed;
+    }
+}

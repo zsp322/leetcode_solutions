@@ -1,41 +1,43 @@
-
-var A = [3,1,2,4,5];
-
-console.log(helperMergeSort(A));
-
-function helperMergeSort(arr) {
-    if (arr.length <= 1) {
-        return arr;
+/**
+ * // Definition for a Node.
+ * function Node(val,next,random) {
+ *    this.val = val;
+ *    this.next = next;
+ *    this.random = random;
+ * };
+ */
+/**
+ * @param {Node} head
+ * @return {Node}
+ */
+var copyRandomList = function(head) {
+    if (head === null) return head;
+    
+    let dic = new Map();
+    let newHead = new Node(head.val, null, null);
+    
+    let cur1 = head;
+    let cur2 = newHead
+    
+    dic.set(head, newHead);
+    dic.set(null, null);  // Edge case
+    
+    while (cur1.next != null) {
+        cur2.next = new Node(cur1.next.val, null, null);
+        cur1 = cur1.next;
+        cur2 = cur2.next;
+        
+        dic.set(cur1, cur2);
+        
     }
-
-    var mid = Math.floor((arr.length)/2);
-
-    const leftArray = arr.slice(0, mid);
-    const rightArray = arr.slice(mid, arr.length);
-
-    const left = helperMergeSort(leftArray);
-    const right = helperMergeSort(rightArray);
-
-    return merge(left, right);
-
-}
-
-function merge(left, right) {
-    let result = []
-    let indexLeft = 0
-    let indexRight = 0
-
-    while (indexLeft < left.length && indexRight < right.length) {
-        if (left[indexLeft] < right[indexRight]) {
-            result.push(left[indexLeft])
-            indexLeft++
-        } else {
-            result.push(right[indexRight])
-            indexRight++
-        }
+    
+    let cur = newHead;
+    
+    while (head != null) {
+        cur.random = dic.get(head.random);
+        cur = cur.next;
+        head = head.next;
     }
-
-    return result.concat(left.slice(indexLeft)).concat(right.slice(indexRight))
-}
-
-
+    
+    return newHead;
+};

@@ -9,6 +9,7 @@
 
 /** First question solved by myself!
  *  But convert number to string requires extra running time
+ *  Two Pointer
  *
  */
 

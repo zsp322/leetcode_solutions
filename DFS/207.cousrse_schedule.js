@@ -2,7 +2,7 @@
 /* Description: There are a total of n courses you have to take, labeled from 0 to n-1.
 Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair: [0,1]
 Given the total number of courses and a list of prerequisite pairs, is it possible for you to finish all courses?*/
-// Tag: BFS -- Topological Sort 
+// Tag:  DFS -- Intutive解法
 // Date: March 20, 2019
 // Solving Strategy: DFS -- Intutive解法
 
@@ -28,8 +28,6 @@ var canFinish = function(numCourses, prerequisites) {
             dic.set(prerequisites[i][0], arr);
         }
     }
-    
-    // console.log(dic);
     
     for (let i = 0; i < numCourses; i++) {
         let visited = new Array(numCourses);

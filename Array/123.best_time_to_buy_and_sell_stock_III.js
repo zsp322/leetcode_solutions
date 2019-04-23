@@ -13,11 +13,11 @@
 // 其实题目的本质就是找相对最大值-相对最小值，relatively difference, 最大的2个relative difference即two transactions should be made
 var maxProfit = function(prices) {
     if (prices === null) return 0;
-    let minPrice = 0;
+    let minPriceIndex = 0;
+    
     let maxProfit = [];
 
     for (let i = 0; i < prices.length; i++) {
-        let profit = prices[i] - prices[minPrice];
-
+       
     }
 }

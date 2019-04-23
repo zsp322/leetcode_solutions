@@ -2,15 +2,7 @@
  * Question 15. 3Sum
  * Solved Strategy: Simple Number mainpulation
  * Date: 10/04/2018
- * Description: First time use javascript solve leetcode
- * Learn javascript sort is sort in alphabetic order
- */
-
-
-/** Did it by converting java code in discuss
- *  to javascript solution
- *
- */
+ * // 抄答案的
 
 /**
  * @param {number[]} nums

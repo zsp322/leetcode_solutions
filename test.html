@@ -1,0 +1,28 @@
+<script>
+var addStrings = function(num1, num2) {
+    let ret = ''
+    let carry = 0;
+    let i = num1.length - 1;
+    let j = num2.length - 1;
+
+    while (i >= 0 || j >= 0 || carry === 1) {
+        let n1 = i >= 0 ? num1.charAt(i--) : '0';
+        let n2 = j >= 0 ? num2.charAt(j--) : '0';
+
+
+        let sum = carry + (n1 - '0') + (n2 - '0');
+
+        if (sum >= 10) {
+            sum -= 10;
+            carry = 1;
+        } else {
+            carry = 0;  //
+        }
+        ret = sum + ret;
+    }
+
+    return ret;
+        
+};
+console.log(addStrings('1', '9'));
+</script>

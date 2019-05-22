@@ -1,28 +1,47 @@
 <script>
-var addStrings = function(num1, num2) {
-    let ret = ''
-    let carry = 0;
-    let i = num1.length - 1;
-    let j = num2.length - 1;
-
-    while (i >= 0 || j >= 0 || carry === 1) {
-        let n1 = i >= 0 ? num1.charAt(i--) : '0';
-        let n2 = j >= 0 ? num2.charAt(j--) : '0';
-
-
-        let sum = carry + (n1 - '0') + (n2 - '0');
-
-        if (sum >= 10) {
-            sum -= 10;
-            carry = 1;
-        } else {
-            carry = 0;  //
+var minWindow = function(s, t) {
+    if (s === null || t === null) return "";
+    
+    for (let i = t.length; i <= s.length; i++) {
+        for (let j = 0; j <= s.length - i; j++) {
+            let word = s.substring(j, i + j);
+            if (checkSimilarity(word, t)) return word;
         }
-        ret = sum + ret;
+    }
+    
+    return "";
+};
+
+const checkSimilarity = function(word1, word2) {
+    let dic1 = new Map();  // Window
+    let dic2 = new Map();  // Origin Word
+    
+
+    let charArr1 = word1.split("");
+    let charArr2 = word2.split("");
+    
+    for (let i = 0; i < charArr1.length; i++) {
+        if (dic1.has(charArr1[i])) dic1.set(charArr1[i], dic1.get(charArr1[i]) + 1);
+        else dic1.set(charArr1[i], 1);
+    }
+    
+    for (let i = 0; i < charArr2.length; i++) {
+        if (dic2.has(charArr2[i])) dic2.set(charArr2[i], dic2.get(charArr2[i]) + 1);
+        else dic2.set(charArr2[i], 1);
     }
 
-    return ret;
-        
-};
-console.log(addStrings('1', '9'));
+    if (word1 === "abbbbbcdd") {
+        console.log(dic1);
+        console.log(dic2);
+    }
+    
+    for (var [key, value] of dic2.entries()) {
+        if (!dic1.has(key)) return false;
+        else {
+            if (dic1.get(key) < value) return false;
+        }
+    }
+    return true;
+}
+minWindow("aaaaaaaaaaaabbbbbcdd","abcdd");
 </script>

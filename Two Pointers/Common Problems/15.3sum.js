@@ -1,6 +1,6 @@
 /**
  * Question 15. 3Sum
- * Solved Strategy: Simple Number mainpulation
+ * Solved Strategy: Two Pointers
  * Date: 10/04/2018
  * // 抄答案的
 
@@ -52,4 +52,44 @@ var threeSum = function(nums) {
 
     return res;
 
+}
+
+
+// 二刷
+// 3 Sum 应该是很简单的题目，但是还是有点卡壳，主要是怎么保证不DUPLICATE
+// 一开始用的是TWO SUM的变种方式，发现并没有办法去重，该换双指针方法
+// 需要二刷
+
+var threeSum = function(nums) {
+    if (nums === null || nums.length === 0) return [];
+    let res = [];
+    nums.sort(function(a, b) {return a - b;});  // After sort, it won't have duplicate triplets
+
+
+    for (let i = 0; i < nums.length; i++) {
+        let left = i + 1;
+        let right = nums.length - 1;
+
+        if (i > 0 && nums[i] === nums[i - 1]) continue;
+
+        while (left < right) {
+            const sum = nums[left] + nums[right] + nums[i];
+            if (sum === 0) {
+                res.push([i, left, right]);
+
+                while (left + 1 < right && nums[left + 1] === nums[left]) left++;
+                while (right - 1 > left && nums[right - 1] === nums[right]) right--;
+
+                left++;
+                right--;
+            } else if (sum < 0) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+    }
+
+    return res;
 }

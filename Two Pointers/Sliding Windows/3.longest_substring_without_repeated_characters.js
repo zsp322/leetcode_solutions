@@ -70,3 +70,27 @@ var lengthOfLongestSubstring = function(s) {
 
     return res;
 };
+
+
+// 二刷选择了傻瓜式的Sliding Window的方式，其实可以用HASHMAP存INDEX和VALUE的PAIR,就可以跳过一个个遍历的过程
+var lengthOfLongestSubstring = function(s) {
+    if (s === null) return s;
+    let dic = new Set();
+
+    let i = 0;
+    let j = 0;
+    let res = 0;
+
+    // 二刷的时候没有注意到这个边界条件的判断，选择了左指针想遍历所有的条件，然而没有想到右指针会跑出边界
+    while (j < s.length) {
+        if (dic.has(s.charAt(j))) {
+            dic.delete(s.charAt(i));
+            i++;
+        } else {
+            dic.add(s.charAt(j));
+            if (res < j - i + 1) res = j - i + 1;
+            j++;
+        }
+    }
+    return res;
+}

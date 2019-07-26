@@ -44,9 +44,39 @@ function extendPalindrome(s ,i, j) {
         }
         i--;
         j++;
-        console.log("i is " + i);
-        console.log("j is" + j);
-        console.log("result is" + res);
-        console.log("Max length is" + maxLength);
+    }
+}
+
+// 二刷自己做出来的，但是代码没有DISCUSS里的简洁
+let res = '';
+var longestPalindrome = function(s) {
+    if (s === null) return s;
+    res = s.charAt(0);
+    for (let i = 0; i < s.length; i++) {
+        extendString(s, i, i);
+        if (i > 0 && s.charAt(i) === s.charAt(i - 1)) extendString(s, i, i - 1);
+    }
+
+    return res;
+};
+
+
+const extendString = function(s, index1, index2) {
+    let temp = index1 === index2 ? s.charAt(index1) : s.substring(index1, index2 + 1);
+    index1--;
+    index2++;
+    while (index1 >= 0 && index2 < s.length) {
+        const leftChar = s.charAt(index1);
+        const rightChar = s.charAt(index2);
+
+        if (leftChar != rightChar) break;
+        else {
+            temp = leftChar + temp;   // ab
+            temp = temp + rightChar;  // abc
+            index1--;
+            index2++;
+            if (temp.length > res.length) res = temp;
+        }
+
     }
 }

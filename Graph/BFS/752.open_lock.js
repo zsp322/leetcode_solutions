@@ -3,6 +3,7 @@
 // Level: Medium
 // 心得：一道简单straightforward的bfs题目，犯了个错误是character = 9的边界条件没考虑
 // 抄了discuss里的建string写法，原来自己写的太琐碎，不简练
+
 /**
  * @param {string[]} deadends
  * @param {string} target

@@ -16,7 +16,7 @@ var maxArea = function(height) {
     let j = height.length - 1;
     let res = Number.MIN_SAFE_INTEGER;
     while (i < j) {
-        let area = Math.min(height[i], height[j]) * (j - i + 1);
+        let area = Math.min(height[i], height[j]) * (j - i);
         let res = area > res ? area : res; 
         if (height[i] < height[j]) {
             i++;
@@ -27,3 +27,23 @@ var maxArea = function(height) {
 
     return res;
 };
+
+
+// 二刷还是没有想出来，看了上次的解法就意识到了双指针从两头开始, 如果哪一段小就往下移，因为对于固定的高度，如果不改变高度但缩小宽度，则面积只会减小
+var maxArea = function(height) {
+    if (height === null || height.length === 0) return 0;
+    let left = 0;
+    let right = height.length - 1;
+    let res = Number.MIN_SAFE_INTEGER;
+
+    while (left < right) {
+        res = Math.max(res, Math.min(height[left], height[right]) * (right - left));
+        if (height[left] < height[right]) {
+            left++;
+        } else {
+            right--;
+        }
+    }
+
+    return res;
+}

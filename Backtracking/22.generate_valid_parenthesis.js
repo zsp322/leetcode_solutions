@@ -87,3 +87,32 @@ const dfsHelper = function(res, str, open, close, max){
         dfsHelper(res, str + ")", open, close + 1, max);
     }
 }
+
+// 二刷
+    var generateParenthesis = function(n) {
+        if (n === 0) return [];
+        let res = [];
+        dfsHelper2(res, '', 0, n, n, n);
+        return res;
+    };
+
+// Only generate valid combination
+// @param leftBracket the left brackets in the current path
+const dfsHelper2 = function(res, curPath, leftBracket, leftBracketRemaining, rightBracket, n) {
+    if (curPath.length === n * 2)  {
+        if (!res.includes(curPath)) res.push(curPath);
+    } else {
+        if (leftBracket > 0) {
+            // You should have some rightBrack left, otherwise it would be a non-valid string
+            if (rightBracket > 0) {
+                dfsHelper(res, curPath + ')', leftBracket - 1, leftBracketRemaining, rightBracket - 1, n);
+            }
+            // When backtracking come back, it wanna see whether it can append left bracket
+            if (leftBracketRemaining > 0) {
+                dfsHelper(res. curPath + '(' , leftBracket + 1, leftBracketRemaining - 1, rightBracket, n);
+            }
+        } else {
+            dfsHelper(res, curPath + '(', leftBracket + 1, leftBracketRemaining - 1, rightBracket, n);
+        }
+    }
+}

@@ -36,3 +36,31 @@ const dfsHelper = function(res, candidates, target, curPath, sum, curIndex) {
         }
     }
 }
+
+
+// 二刷
+var combinationSum = function(candidates, target) {
+    if (candidates === null) return [];
+    let res = [];
+
+    dfsHelper(res, candidates, target, [], 0, 0);
+    return res;
+};
+
+
+const dfsHelper = function(res, candidates, target, curPath, curSum, curIdx) {
+    if (curSum > target) return; //Since there is no negative number
+
+    if (curSum === target) {
+        res.push(curPath.slice(0, curPath.length));
+    } else {
+        let leftSum = target - curSum;
+        for (let i = curIdx; i < candidates.length; i++) {
+            if (candidates[i] < leftSum) {
+                curPath.push(candidates[i]);
+                dfsHelper(res, candidates, target, curPath, curSum + candidates[i], curIdx + 1);
+                curPath.pop();
+            }
+        }
+    }
+}

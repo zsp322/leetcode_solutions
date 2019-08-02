@@ -43,7 +43,7 @@ const dfsHelper = function(res, curPath, openBracket, left, right, n) {
                 left++;
                 openBracket--;
                 curPath.pop();
-
+            }
             if (right > 0) {
                 curPath.push(')');
                 right--;
@@ -61,14 +61,13 @@ const dfsHelper = function(res, curPath, openBracket, left, right, n) {
             left++;
             openBracket--;
             curPath.pop();
-
         }
     }
 }
 
 
 // Optimal Leetcode discussion solution
-var generateParenthesis = function(n) {
+var generateParenthesis2 = function(n) {
     if (n <= 0) return [];
     let res = [];
     dfsHelper(res, "", 0, 0, n);
@@ -89,12 +88,12 @@ const dfsHelper = function(res, str, open, close, max){
 }
 
 // 二刷
-    var generateParenthesis = function(n) {
-        if (n === 0) return [];
-        let res = [];
-        dfsHelper2(res, '', 0, n, n, n);
-        return res;
-    };
+var generateParenthesis = function(n) {
+    if (n === 0) return [];
+    let res = [];
+    dfsHelper2(res, '', 0, n, n, n);
+    return res;
+};
 
 // Only generate valid combination
 // @param leftBracket the left brackets in the current path
@@ -115,4 +114,4 @@ const dfsHelper2 = function(res, curPath, leftBracket, leftBracketRemaining, rig
             dfsHelper(res, curPath + '(', leftBracket + 1, leftBracketRemaining - 1, rightBracket, n);
         }
     }
-}
+};

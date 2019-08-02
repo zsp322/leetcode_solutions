@@ -88,11 +88,3 @@ const swap = function(nums, i, j) {
     nums[i] = nums[j];
     nums[j] = temp;
 }
-
-const reverseSort2(nums, i, j) {
-    if (i > j) return nums;
-
-    while (i < j) {
-        swap(nums, i++, j--);
-    }
-}

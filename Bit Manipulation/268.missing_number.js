@@ -11,4 +11,4 @@ var missingNumber = function(nums) {
     return xor ^ i;
 };
 
-// What about the Amazon follow up? If this array contains duplicates, means may be we are missing more than 1 numbers?
+// What about the Amazon follow up? If this array contains duplicate-s, means may be we are missing more than 1 numbers?

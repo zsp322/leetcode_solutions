@@ -1,4 +1,4 @@
-// New York times考题，很简单的一道题，考官建议的indexOf是很有意思的一种解法，但是效率很低，还有一个小bug，亏好没让我写
+// New York times考题，很简单的一道题
 var removeDuplicates = function(nums) {
     if (nums.length === 0 || nums === null) return nums;
     
@@ -39,3 +39,24 @@ var removeDuplicates = function(nums) {
         if (nums[i] != nums[i - 1]) nums[id++] = nums[i];
     }
 }
+
+// 二刷写的有点问题
+var removeDuplicates = function(nums) {
+    if (nums === null || nums.length === 0) return 0;
+
+    let slow = 1;
+    let fast = 1;
+
+    while (fast < nums.length) {
+        if (nums[fast] != nums[fast - 1]) {
+            let temp = nums[slow];
+            nums[slow] = nums[fast];
+            nums[fast] = temp;
+            slow++;
+            // 这里有个逻辑BUG,当你把slow和FAST交换后,FAST和FAST - 1的值不一样了，但其实是DUPLICATE VALUE
+            // 问题其实在于并不需要SWA，其实只要把FAST POINTER的value传给slow就好了
+        }
+        fast++;
+    }
+    return slow;
+};

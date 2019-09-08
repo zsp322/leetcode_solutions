@@ -30,3 +30,36 @@ const swap = function(nums, index1, index2) {
     nums[index1] = nums[index2];
     nums[index2] = temp;
 }
+
+
+// Sort K colors
+const sortColors2 = function(colors, k) {
+    if (colors === null || colors.length === 0) return;
+
+    rabinbowSort(colors, 0, colors.length - 1, 1, k);
+
+}
+
+const rainbowSort = function(colors, start, end, colorFrom, colorTo) {
+    if (colorsFrom === colorTo) return;
+    if (start >= end) return;
+
+    let left = start;
+    let right = end;
+    let pivot = Math.floor((colorFrom + colorTo) / 2);
+
+    while (left <= right) {
+        while (left <= right && nums[left] <= pivot) left++;  // <= pivot保证pivot COLOR会在START -> LEFT 之间
+        while (left <= right && nums[right] > pivot) right--;
+
+        if (left <= right) {
+            let temp = colors[left];
+            colors[left] = colors[right];
+            colors[right] = temp;
+        }
+
+    }
+
+    rainbowSort(colors, start, left, colorFrom, pivot);
+    rainbowSort(colors, right, end, pivot + 1, colorTo);
+}

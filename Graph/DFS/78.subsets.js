@@ -39,3 +39,29 @@ function dfs(nums, res, curCombo, curIndex) {
 
     }
 }
+
+
+// 二刷 8.29, contains only distinct elements
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsets = function(nums) {
+    if (nums === null || nums.length === 0) return [];
+    let res = [];
+    dfs(res, nums, [], 0);
+    return res;
+};
+
+const dfs = function(res, nums, curPath, index) {
+    if (curPath.length === nums.length) {
+        res.push(curPath.slice(0, curPath.length));
+    } else {
+        res.push(curPath.slice(0, curPath.length));  //Not sure how it handles empty bracket []
+        for (let i = index; i < nums.length; i++) {
+            curPath.push(nums[i]);
+            dfs(res, nums, curPath, i + 1);
+            curPath.pop();
+        }
+    }
+}

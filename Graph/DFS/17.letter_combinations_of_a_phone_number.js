@@ -75,3 +75,38 @@ const dfsHelper = function(dic, digits, curPath, res) {
         }
     }
 }
+
+
+//三刷 8.28
+var letterCombinations = function(digits) {
+    if (digits === null || digits.length === 0) return [];
+    let dic = new Map();
+    dic.set('2', ['a', 'b', 'c']);
+    dic.set('3', ['d', 'e', 'f']);
+    dic.set('4', ['g', 'h', 'i']);
+    dic.set('5', ['j', 'k', 'l']);
+    dic.set('6', ['m', 'n', 'o']);
+    dic.set('7', ['p', 'q', 'r', 's']);
+    dic.set('8', ['t', 'u', 'v']);
+    dic.set('9', ['w', 'x', 'y', 'z']);
+
+    let res = [];
+    dfs(res, digits, 0, []);
+    return res;
+}
+
+const dfs = function (res, digits, index, curPath) {
+    if (index === digits.length) {
+        let string = curPath.join();
+        res.push(string);
+    } else {
+        let digit = digits.charAt(index);
+        let nextCharArr = dic.get(digit);
+
+        for (let i = 0; i < nextCharArr.length; i++) {
+            curPath.push(nextCharArr[i]);
+            dfs(res, digits, index + 1, curPath);
+            curPath.pop();
+        }
+    }
+}

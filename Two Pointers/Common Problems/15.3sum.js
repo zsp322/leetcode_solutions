@@ -53,9 +53,6 @@ var threeSum = function(nums) {
     return res;
 
 }
-
-
-// 二刷
 // 3 Sum 应该是很简单的题目，但是还是有点卡壳，主要是怎么保证不DUPLICATE
 // 一开始用的是TWO SUM的变种方式，发现并没有办法去重，该换双指针方法
 // 需要二刷

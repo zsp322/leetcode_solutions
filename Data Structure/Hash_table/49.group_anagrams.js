@@ -1,7 +1,5 @@
 // Given an array of strings, group anagrams together.
-//
-//     Example:
-//
+// Example:
 // Input: ["eat", "tea", "tan", "ate", "nat", "bat"],
 //     Output:
 // [
@@ -40,7 +38,4 @@ var groupAnagrams = function(strs) {
     return res;
 };
 
-// character count array当作key
-var groupAnagrams = function(strs) {
 
-}

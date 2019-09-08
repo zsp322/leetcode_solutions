@@ -64,3 +64,32 @@ const dfsHelper = function(res, candidates, target, curPath, curSum, curIdx) {
         }
     }
 }
+
+// 三刷 8.28
+// No duplicate element but allowed multiple usage of one element
+var combinationSum = function(candidates, target) {
+    if (candidates === null || candidates.length === 0) return [];
+
+    // 如果答案是ascending order， 则在这里排个序较好
+    let res = [];
+    dfs(res, candidates, curPath, curSum, index, target);
+    return res;
+}
+
+const dfs = function(res, candidates, curPath, curSum, index, target) {
+    // Mistake made here is index doesn't have to be equal to candidates.length, it can stop any place
+    if (index === candidates.length && curSum === target) {
+        res.push(curPath);
+    } else {
+        let leftSum = target - curSum;
+        // Don't forward the findings
+        // Mistake here made is i = index + 1
+        for (let i = index; i < candidates.length; i++) {
+             if (nums[i] <= leftSum) {
+                 curPath.push(candidates[i]);
+                 dfs(res, candidates, curPath, curSum + nums[i], i, target);
+                 curPath.pop()
+             }
+        }
+    }
+}

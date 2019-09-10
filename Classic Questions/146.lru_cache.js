@@ -12,70 +12,12 @@
 /**
  * @param {number} capacity
  */
-var LRUCache = function(capacity) {
-    this.prevToCur = new Map()
-    this.valToNode = new Map();
-    this.dic = new Map();
-    this.linkedList = new doublyLinkedList();
-    this.capacity = capacity;
-};
-
-/**
- * @param {number} key
- * @return {number}
- */
-LRUCache.prototype.get = function(key) {
-     if (!this.dic.has(key)) return -1;
-
-     // head node
-     if (!this.prevToCur.has(key)) {
-         return dic.get(key); //Since it's already the head node
-     }
-
-     let prevNode = this.prevToCur.get(key);
-     prevNode.next = prevNode.next.next;
-
-     if (prevNode === this.linkedList.tail) {
-         this.linkedList.tail
-     }
-};
-
-/**
- * @param {number} key
- * @param {number} value
- * @return {void}
- */
-LRUCache.prototype.put = function(key, value) {
-    if (this.dic.has(key)) {
-        this.dic.set(key, value);
-        moveToTheFront();
-    }
-
-    if (this.linkedList.size === this.capacity) {
-        let prev = this.prevToCur.get(this.linkedList.tail.val);
-        prev.next = null;
-        this.linkedList.tail = prev; // Update from tail
-    } else {
-
-        let node = new ListNode(key);
-        dic.set(key, val);
-        this.prevToCur(node, this.linkedList.head);
-        this.linkedList.head = node;
-        if (this.linkedList.tail === null) this.linkedList.tail = node;
-        this.linkedList.size++;
-    }
-};
-
-const moveToTheFront = function() {
-
-}
-
-
-
 class ListNode {
-    constructor(val) {
+    constructor(val, key) {
         this.val = val;
+        this.key = key;
         this.next = null;
+        this.prev = null;
     }
 }
 
@@ -86,21 +28,89 @@ class doublyLinkedList {
         this.size = 0;
     }
 }
+var LRUCache = function(capacity) {
+    this.dic = new Map();
+    this.linkedList = new doublyLinkedList();
+    this.capacity = capacity;
+    
+    this.linkedList.head = new ListNode();
+    this.linkedList.tail = new ListNode();
+    
+    this.linkedList.head.next = this.linkedList.tail;
+    this.linkedList.tail.prev = this.linkedList.head; //It's smart to do this way
+    
+};
+
+
+// Always add node right after head
+LRUCache.prototype.addNode = function(node) {
+    node.prev = this.linkedList.head;
+    node.next = this.linkedList.head.next;
+    
+    this.linkedList.head.next.prev = node;
+    this.linkedList.head.next = node;
+};
+
+
+LRUCache.prototype.removeNode = function(node) {
+    let prev = node.prev;
+    let nextNode = node.next;
+    
+    prev.next = nextNode;
+    nextNode.prev = prev;
+};
+
+LRUCache.prototype.moveTohead = function(node) {
+    this.removeNode(node);
+    this.addNode(node);
+};
+
+LRUCache.prototype.popTail = function() {
+    let res = this.linkedList.tail.prev;
+    this.removeNode(res);
+    return res;
+};
+
+/**
+ * @param {number} key
+ * @return {number}
+ */
+LRUCache.prototype.get = function(key) {
+     if (!this.dic.has(key)) return -1;
+     
+     let node = this.dic.get(key);
+     this.moveTohead(node);
+     return node.val;
+};
+
+/**
+ * @param {number} key
+ * @param {number} value
+ * @return {void}
+ */
+LRUCache.prototype.put = function(key, value) {
+   let node = this.dic.get(key);
+   
+   if (node === null || node === undefined) {
+       node = new ListNode(value, key);
+       this.dic.set(key, node);
+       this.addNode(node);
+       this.linkedList.size++;
+       
+       if(this.linkedList.size > this.capacity) {
+           let tail = this.popTail();
+           this.dic.delete(tail.key);
+           this.linkedList.size--;
+       }
+   } else {
+       node.val = value;
+       this.moveTohead(node);
+   }
+};
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+// JS Specific Solution
 var LRUCache = function(capacity) {
     this.dic = new Map();
     this.size = capacity;

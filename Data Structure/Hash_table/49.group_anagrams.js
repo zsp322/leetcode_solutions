@@ -38,4 +38,30 @@ var groupAnagrams = function(strs) {
     return res;
 };
 
+// 更好的做法是BUILD COUNT STRING去做Key省去排序的时间
+//
+var groupAnagrams = function(strs) {
+    if (strs === null || strs.length === 0) return strs;
+
+    let dic = new Map();
+    let count = new Array(26).fil(0);
+
+    for (let str of strs) {
+        let key = '';
+
+        for (let i = 0; i < 26; i++) {
+            key = key + count[i] + '#';
+        }
+
+        if (dic.has(key)) {
+            dic.set(key, dic.get(key).push(str));
+        } else {
+            let arr = [str];
+            dic.set(key, arr);
+        }
+    }
+
+    return new Array(dic.values());
+};
+
 

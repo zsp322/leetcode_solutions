@@ -26,7 +26,7 @@ const mergeHelper = function (lists, start, end) {
 }
 const mergeTwoLists = function(list1, list2) {
     let newHead = new ListNode(-1);
-    let cur = newHead;
+    let tail = newHead;
     let cur1 = list1;
     let cur2 = list2;
 
@@ -48,4 +48,29 @@ const mergeTwoLists = function(list1, list2) {
 
 
     return newHead.next;
+}
+
+const mergeTwoListsInPlace = function(head1, head2) {
+    let dummy = new ListNode(-1);
+    let cur = dummy;
+
+    dummy.next = head1;
+
+    while (head1 != null && head2 != null) {
+        if (head1.val < head2.val) {
+            head1 = head1.next;
+        } else {
+            let nextNode = cur.next;
+            cur.next = head2;
+            let temp = head2.next;
+            head2.next = nextNode; //接上后半程的NODE
+            head2 = temp;
+        }
+        cur = cur.next;
+    }
+
+    if (head1 != null) cur.next = head1;
+    if (head2 != null) cur.next = head2;
+
+    return dummy.next;
 }

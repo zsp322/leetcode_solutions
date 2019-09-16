@@ -64,7 +64,8 @@ var nextPermutation = function(nums) {
 
     let i = nums.length - 1;
 
-    while (i > 0 && nums[i - 1] > nums[i]) {
+    while (i > 0 && nums[i - 1] >=
+    nums[i]) {
         i--;
     }
 

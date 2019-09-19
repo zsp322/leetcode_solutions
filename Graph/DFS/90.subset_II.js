@@ -4,6 +4,7 @@
  */
 // Given a collection of integers that might contain duplicates, nums, return all possible subsets (the power set).
 // Note: The solution set must not contain duplicate subsets.
+// DFS solution
 var subsetsWithDup = function(nums) {
    nums.sort();
    let res = [];
@@ -25,3 +26,27 @@ const dfs = function(res, nums, curPath, index) {
         }
     }
 }
+
+
+// Iterative solution
+var subsetsWithDup = function(nums) {
+    nums.sort();
+    let res = [[]];
+
+    let size = 0;
+    let startIdx = 0;
+
+
+    for (let i = 0; i < nums.length; i++) {
+        // 这两步很巧妙
+        startIdx = (i >= 1 && nums[i] === nums[i - 1]) ? size : 0;
+        size = res.length;
+
+        for (let j = startIdx; j < nums.length; j++) {
+            let subset = [...res[j]];
+            subset.push(nums[i]);
+            res.push(subset);
+        }
+    }
+    return res;
+};

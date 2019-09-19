@@ -65,3 +65,21 @@ const dfs = function(res, nums, curPath, index) {
         }
     }
 }
+
+
+// Iterative写法
+var subsets = function (nums) {
+    if (nums === null || nums.length === 0) return [];
+    let res = [[]];
+
+    for (let num of nums) {
+        let size = res.length;
+
+        for (let i = 0; i < size; i++) {
+            let subSet = [...res[i]];
+            subSet.push(num);
+            res.push(subSet);
+        }
+    }
+    return res;
+}

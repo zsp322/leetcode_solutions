@@ -41,7 +41,7 @@ const sortColors2 = function(colors, k) {
 }
 
 const rainbowSort = function(colors, start, end, colorFrom, colorTo) {
-    if (colorsFrom === colorTo) return;
+    if (colorFrom === colorTo) return;
     if (start >= end) return;
 
     let left = start;
@@ -49,13 +49,16 @@ const rainbowSort = function(colors, start, end, colorFrom, colorTo) {
     let pivot = Math.floor((colorFrom + colorTo) / 2);
 
     while (left <= right) {
-        while (left <= right && nums[left] <= pivot) left++;  // <= pivot保证pivot COLOR会在START -> LEFT 之间
+        while (left <= right && nums[left] <= pivot) left++;  // <= pivot保证pivot COLOR会在START -> RIGHT 之间
         while (left <= right && nums[right] > pivot) right--;
 
         if (left <= right) {
             let temp = colors[left];
             colors[left] = colors[right];
             colors[right] = temp;
+
+            left++;
+            right--;
         }
 
     }
@@ -63,3 +66,5 @@ const rainbowSort = function(colors, start, end, colorFrom, colorTo) {
     rainbowSort(colors, start, left, colorFrom, pivot);
     rainbowSort(colors, right, end, pivot + 1, colorTo);
 }
+
+

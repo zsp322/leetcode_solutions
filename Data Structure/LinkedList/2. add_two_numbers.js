@@ -93,3 +93,36 @@ var addTwoNumbers = function(l1, l2) {
 
 
 };
+
+// Substract two numbers is the same logic as addition of two numbers
+var subStractTwoNumber = function (l1, l2) {
+    if (l1 === null && l2 === null) return l1;
+
+    let temp1 = l1;
+    let temp2 = l2;
+    let res = new ListNode(-1);
+    let temp3 = res;
+
+    let carryone = 0;
+
+    while (temp1 != null || temp2 != null) {
+        let num1 = temp1 === null ? 0 : temp1.val;
+        let num2 = temp2 === null ? 0 : temp2.val;
+
+        let sub = num1 - num2 - carryone;
+
+        if (sub < 0) {
+            sub = num1 + 10 - num2 - carryone;
+            carryone = 1;
+        } else carryone = 0;
+
+        temp3.next = new ListNode(sub);
+        temp3 = temp3.next;
+
+        if (temp1 != null) temp1 = temp1.next;
+        if (temp2 != null) temp2 = temp2.next;
+    }
+
+    if (carryone != 0) temp3.next = new ListNode(-1);
+    return res.next;
+}

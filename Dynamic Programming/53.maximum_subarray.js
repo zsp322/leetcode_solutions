@@ -10,6 +10,7 @@
  * @return {number}
  */
 // 感觉还是蛮明显的DP题目的，但是提示说这是个divide and conquer问题，看看discuss
+// Greedy Algorithm
 var maxSubArray = function(nums) {
     if (nums === null || nums.length === 0) return 0;
 

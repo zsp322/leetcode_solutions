@@ -5,9 +5,8 @@
 /**
  * @param {number} capacity
  */
-    // LRU的正常解法，doubly linked list和hashmap的结合， 每次get,或者put一个值，将其从linkedlist的拿出，加入链表头部
-    // 当reach maximum时候，将尾端抛出，从hashmap减掉
-    // 从hashmap存prev to val，这样每次get, put的时候，可以O(1)的方式delete
+// LRU的正常解法，doubly linked list和hashmap的结合， 每次get,或者put一个值，将其从linkedlist的拿出，加入链表头部
+// 当reach maximum时候，将尾端抛出，从hashmap减掉
 
 /**
  * @param {number} capacity

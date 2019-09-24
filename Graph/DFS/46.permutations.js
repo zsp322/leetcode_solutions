@@ -65,7 +65,7 @@ const dfs = function(res, nums, curPath) {
 var permute = function(nums) {
     let res = [];
     let visited = new Array(nums.length).fill(false);
-    dfs(res, nums, [], nums, visited);
+    dfs(res, nums, []INR, visited);
     return res;
 };
 

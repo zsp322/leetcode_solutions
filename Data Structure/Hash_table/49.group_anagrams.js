@@ -44,10 +44,12 @@ var groupAnagrams = function(strs) {
     if (strs === null || strs.length === 0) return strs;
 
     let dic = new Map();
-    let count = new Array(26).fil(0);
+
 
     for (let str of strs) {
         let key = '';
+        let count = new Array(26).fil(0);
+
 
         for (let i = 0; i < 26; i++) {
             key = key + count[i] + '#';

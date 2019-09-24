@@ -30,6 +30,7 @@ var searchRange = function(nums, target) {
 };
 
 
+
 const findFirstOccurency = function (nums, target, res) {
     let start = 0;
     let end = nums.length - 1;
@@ -46,6 +47,23 @@ const findFirstOccurency = function (nums, target, res) {
     }
 }
 
+
+const findFirstOccurency = function (nums, target) {
+    let start = 0;
+    let end = nums.length - 1;
+
+    while (start + 1 < end) {
+        let mid = Math.floor((start + end) / 2);
+
+        if (nums[mid] >= target) {
+            end = mid - 1;
+        } else {
+            start = mid + 1;
+        }
+    }
+
+    return nums[start] === target ? start : end;
+}
 const findLastOccurency = function () {
     let start = 0;
     let end = nums.length - 1;

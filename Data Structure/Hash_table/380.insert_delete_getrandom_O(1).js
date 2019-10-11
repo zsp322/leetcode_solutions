@@ -1,6 +1,3 @@
-/**
- * Initialize your data structure here.
- */
 var RandomizedSet = function() {
     this.arr = [];
     this.map = new Map();
@@ -27,11 +24,14 @@ RandomizedSet.prototype.remove = function(val) {
     if (!this.map.has(val)) return false;
     let index = this.map.get(val);
 
-    let temp = arr[arr.length - 1];
-    arr[arr.length - 1] = arr[index];
-    arr[index] = temp;
 
-    arr.pop(); //Delete the last element
+    let temp = this.arr[this.arr.length - 1];
+    this.map.set(temp, index);
+    this.arr[this.arr.length - 1] = this.arr[index];
+    this.arr[index] = temp;
+
+    this.arr.pop(); //Delete the last element
+    this.map.delete(val);
     return true;
 };
 

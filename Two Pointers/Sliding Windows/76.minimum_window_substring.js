@@ -99,3 +99,60 @@ var minWindow = function(s, t) {
     return head === -1 ? "" : s.substring(head, head + window);
 
 }
+
+
+// 二刷
+var minWindow = function(s, t) {
+    let dic = new Map();
+    // Compute window count
+    for (let i = 0; i < t.length; i++) {
+        if (dic.has(t.charAt(i))) {
+            dic.set(t.charAt(i), dic.get(t.charAt(i)) + 1);
+        } else {
+            dic.set(t.charAt(i), 1);
+        }
+    }
+    let required = dic.size; // Character needs to be formed
+    let windowCount = new Map();
+    let formed = 0;
+
+    let left = 0;
+    let right = 0;
+
+    let ans = [Number.MAX_SAFE_INTEGER, 0, 0]; // Left
+
+    while (right < s.length) {
+        let character = s.charAt(right);
+        if (windowCount.has(character)) {
+            windowCount.set(character, windowCount.get(character) + 1);
+        } else {
+            windowCount.set(character, 1);
+        }
+
+        if (dic.has(character) && dic.get(character) === windowCount.get(character)) {
+            formed++;
+        }
+
+
+        while (left <= right && formed === required) {
+            let leftChar = s.charAt(left);
+
+            if (right - left + 1 < ans[0]) {
+                ans[0] = right - left + 1;
+                ans[1] = left;
+                ans[2] = right;
+            }
+
+            windowCount.set(leftChar, windowCount.get(leftChar) - 1);
+
+            if (dic.has(leftChar) && windowCount.get(leftChar) < dic.get(leftChar)) {
+                formed--;
+            } // 这里一开始写的不太对，
+
+            left++; // 这里一开始是放在
+        }
+        right++;
+    }
+
+    return ans[0] === Number.MAX_SAFE_INTEGER ? "" : s.substring(ans[1], ans[2] + 1);
+};

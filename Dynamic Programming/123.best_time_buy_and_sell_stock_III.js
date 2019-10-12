@@ -24,10 +24,12 @@ var maxProfit = function(prices) {
 
 
 // Improved version I:
+// (seems not working)
 var maxProfit = function(prices) {
     if (prices === null || prices.length === 0) return 0;
 
     let dp = new Array(3).fill(0).map(() => new Array(prices.length));
+    
     let min = new Array(3).fill(prices[0]);
 
     for (let i = 1; i < prices.length; i++) {
@@ -39,4 +41,20 @@ var maxProfit = function(prices) {
 
     return dp[2][prices.length - 1];
 }
+
+// From your daddy:
+var maxProfit = function(prices) {
+    if (prices === null || prices.length === 0) return 0;
+    let dp = new Array(3).fill(0).map(x => new Array(prices.length).fill(0))
+
+    for(let i=1; i <= 2; i++){
+        let min = Infinity;
+        for(let j=1; j < prices.length; j++){
+            min= Math.min(min, prices[j-1] -dp[i-1][j-1]);
+            dp[i][j] = Math.max(dp[i][j - 1], prices[j] - min);
+        }
+    }
+    return dp[2][prices.length - 1];
+}
+
 

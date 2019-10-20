@@ -31,8 +31,9 @@ const dfsHelper = function(res, s, curIdx, curCombo) {
 
 
             let nextString = s.substring(curIdx, i);
-            let nextNumber = Number.parseInt(nextString);
-
+            let nextNumber = Number.parseInt(nextString); // need to consider if nextNumber is greater than 255;
+            if(nextNumber > 255) { return; }
+ 
             if (nextString.startsWith('0') && (nextNumber != 0 || nextString.length != 1))continue;  //这里花里挺多时间考虑的
 
             if (nextNumber >= 0 && nextNumber <= 255) {

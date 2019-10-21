@@ -26,7 +26,8 @@ const dfsHelper = function(res, s, curIdx, curCombo) {
             return;
         }
     } else {
-        for (let i = curIdx + 1; i <= curIdx + 3; i++) {
+        let upperBound = Math.min(curIdx + 3, s.length); // although most situations upperBoud will be curIdx + 3, 
+        for (let i = curIdx + 1; i <= upperBound; i++) { // it will be different at last loop. Save a bit time and space
             if (i > s.length) continue;
 
 

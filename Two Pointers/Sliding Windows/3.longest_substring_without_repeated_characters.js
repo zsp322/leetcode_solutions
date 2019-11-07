@@ -51,6 +51,7 @@ var lengthOfLongestSubstring = function(s) {
     return res;
 
 }
+
 // Slidng-window optimized soltuion
 // 还是要动手写，不然会眼高手低，因为这个思路跟上面的不一样
 var lengthOfLongestSubstring = function(s) {

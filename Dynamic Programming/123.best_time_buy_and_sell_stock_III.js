@@ -43,6 +43,7 @@ var maxProfit = function(prices) {
 }
 
 // From your daddy:
+// You will call me daddy one day
 var maxProfit = function(prices) {
     if (prices === null || prices.length === 0) return 0;
     let dp = new Array(3).fill(0).map(x => new Array(prices.length).fill(0))

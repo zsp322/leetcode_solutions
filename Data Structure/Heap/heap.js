@@ -1,4 +1,4 @@
-class Binary {
+class BinaryHeap {
     constructor() {
         this.heap = [];
     }

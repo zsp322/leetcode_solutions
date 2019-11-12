@@ -11,36 +11,44 @@ class Solution {
         int m = nums1.length;
         int n = nums2.length;
 
+        // Guarantee m < n
         int left = 0;
-        int right = nums1.length - 1;
+        int right = nums1.length;
+        int halfLength = (m + n + 1) / 2;
 
         while (left <= right) {
-            int mid = Math.floor((left + right) / 2);
-            int partitionX = mid - left + 1;
-            int partitionY = Math.floor((m + n) / 2) - partitionX;
+            int partitionX = (left + right) / 2;
+            int partitionY = halfLength - partitionX;
 
-            int leftMax1 = nums[mid];
-            int leftMax2 = nums[partitionY - 1];
-            int leftMax = Math.max(leftMax1, leftMax2);
-
-            int rightMin1 = nums[mid - 1]; // How to handle ege case
-            int rightMin2 = nums[partitionY];
-            int rightMin = Math.min(rightMin1, rightMin2);
-
-            if (leftMax < rightMin) {
-                if (paritionX == partitionY) {
-                    return (rightMax + leftMax) / 2.0;
-                } else {
-                    return leftMax;
-                }
+            if (partitionX > left && nums1[partitionX - 1] > nums2[partitionY]) {
+                right = partitionX - 1;
+            } else if (partitionX < right && nums2[partitionY - 1] > nums1[partitionX]) {
+                left = partitionX + 1;
             } else {
-                if (leftMax1 > rightMin2) {
-                    right = mid - 1;
+                int maxLeft = 0;
+                if (partitionX == 0) {
+                    maxLeft = nums2[partitionY - 1];
+                } else if (partitionY == 0) {
+                    maxLeft = nums1[partitionX - 1];
                 } else {
-                    left = mid + 1;
+                    maxLeft = Math.max(nums1[partitionX - 1], nums2[partitionY - 1]);
                 }
+
+                if ( (m + n) % 2 == 1 ) { return maxLeft; }
+
+                int minRight = 0;
+                if (partitionX == m) {
+                    minRight = nums2[partitionY];
+                } else if (partitionY == n) {
+                    minRight = nums1[partitionX];
+                } else {
+                    minRight = Math.min(nums1[partitionX], nums2[partitionY]);
+                }
+
+                return (maxLeft + minRight) / 2.0;
             }
         }
 
-        return 0;
+        return 0.0;
+    }
 }

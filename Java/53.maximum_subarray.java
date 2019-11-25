@@ -17,11 +17,11 @@ class Solution {
     }
 }
 
+
 // Tag: Divide + Conquer
 class Solution {
     public int maxSubArray(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
-
         return mergeSumHelper(nums, 0, nums.length - 1);
     }
 
@@ -29,19 +29,31 @@ class Solution {
         if (left == right) return nums[left];
 
         int mid = (left + right) / 2;
-        int leftSum = mergeSumHelper(nums, 0, mid - 1);
+        // 这里的left，mid只是个边界，选择left到mid可以返回单一element
+        int leftSum = mergeSumHelper(nums, left, mid);
         int rightSum = mergeSumHelper(nums, mid + 1, right);
+        int crossSum = crossSum(nums, left, right, p);
 
-        int middleSum = nums[mid];
-        int leftPtr = mid - 1;
-        while (leftPtr >= 0 && nums[leftPtr] > 0) {
-            middleSum += nums[leftPtr];
-        }
-        int rightPtr = mid + 1;
-        while (rightPtr < nums.length && nums[rightPtr] > 0) {
-            middleSum += nums[rightPtr];
+        return Math.max(Math.max(leftSum, rightSum), crossSum);
+    }
+    public int crossSum(int[] nums, int left, int right, int p) {
+        // if (left == right) return nums[left];
+        int leftSum = Integer.MIN_VALUE;
+        int curSum = 0;
+
+        for (int i = p; i >= left; i--) {
+            curSum += nums[i];
+            leftSum = Math.max(leftSum, curSum);
         }
 
-        return Math.max(leftSum, rightSum, middleSum);
+        int rightSum = Integer.MIN_VALUE;
+        curSum = 0;
+
+        for (int i = p + 1; i <= right; i++) {
+            curSum += nums[i];
+            rightSum = Math.max(rightSum, curSum);
+        }
+
+        return leftSum + rightSum;
     }
 }

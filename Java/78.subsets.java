@@ -1,20 +1,18 @@
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> res = new ArrayList<ArrayList<>>();
-        if (nums == null) return res;
-        dfsHelper(res, new ArrayList<>(), nums, 0);
+        List<List<Integer>> res = new ArrayList<>();
+        if (nums == null || nums.length == 0) return res;
+
+        dfs(res, new ArrayList<>(), nums, -1);
         return res;
     }
-    public void dfsHelper(List<List<Integer>> res, List<Integer> curPath, int[] nums, int curIdx) {
-        if (curPath.size() == nums.length) {
-            res.add(new ArrayList<>(curPath));
-        } else {
-            for (int i = curIdx + 1; i < nums.length; i++) {
-                res.add(new ArrayList<>(curPath));
-                curPath.add(nums[i]);
-                dfsHelper(res, curPath, nums, i);
-                curPath.remove(curPath.size() - 1);
-            }
+
+    public void dfs(List<List<Integer>> res, List<Integer> curPath, int[] nums, int curIdx) {
+        res.add(new ArrayList<>(curPath));
+        for (int i = curIdx + 1; i < nums.length; i++) {
+            curPath.add(nums[i]);
+            dfs(res, curPath, nums, i);
+            curPath.remove(curPath.size() - 1);
         }
     }
 }

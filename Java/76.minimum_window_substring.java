@@ -2,49 +2,56 @@ class Solution {
     public String minWindow(String s, String t) {
         if (s == null || t == null) return "";
 
-        int left = 0;
-        int right = 0;
-        String res = "";
-        HashMap<Character, Integer> dic = new Map<>();
-        HashMap<Character, Integer> characters = new Map<>();
+        HashMap<Character, Integer> hashmap = new HashMap<>();
 
-        // Construct existing characters map
+        // Record how many unique characters in t
+
         for (int i = 0; i < t.length(); i++) {
-            char curChar = t.charAt(i);
-            if (characters.containsKey(curChar)) {
-                characters.put(curChar, characters.get(curChar) + 1);
-            } else {
-                characters.put(curChar, 1);
-            }
+            int count = hashmap.getOrDefault(t.charAt(i), 0);
+            hashmap.put(t.charAt(i), count + 1);
         }
 
-        while (left < s.length()) {
+        int required = hashmap.size();
+        int left = 0;
+        int right = 0;
+        int[] ans = {-1, 0, 0};
+        int formed = 0;
+        HashMap<Character, Integer> countMap = new HashMap<>();
+        while (right < s.length()) {
             char curChar = s.charAt(right);
-            if (dic.containsKey(curChar)) {
-                dic.put(curChar, dic.get(curChar) + 1);
-            } else {
-                dic.put(curChar, 1);
+
+            // Step1: put this character into count map
+            // Step2: check whether it satisfies the dicT
+            // Step3: if not moving forward
+            // Step3: if so, moving left pointer,
+            int count = countMap.getOrDefault(curChar, 0);
+            countMap.put(curChar, count + 1);
+
+            if (hashmap.containsKey(curChar)
+                    && hashmap.get(curChar).intValue() == countMap.get(curChar).intValue()) {
+                formed++;
             }
-            while (left <= right && validCurPath(dic, characters)) {
-                String subString = s.substring(left, right + 1);
-                if (subString.length() < res.length() || res == "") res = subString;
-                char leftChar = s.charAt(left);
-                if (dic.get(leftChar) == 1) {
-                    dic.remove(leftChar);
-                } else {
-                    dic.put(leftChar, dic.get(leftChar) - 1);
+
+            while (left <= right && formed == required) {
+                curChar = s.charAt(left);
+                if (ans[0] == -1 || right - left + 1 < ans[0]) {
+                    ans[0] = right - left + 1;
+                    ans[1] = left;
+                    ans[2] = right;
+                }
+
+                countMap.put(curChar, countMap.get(curChar) - 1);
+                if (hashmap.containsKey(curChar)
+                        && countMap.get(curChar).intValue() < hashmap.get(curChar).intValue()) {
+                    formed--;
                 }
                 left++;
             }
             right++;
         }
-    }
 
-    public boolean validCurPath(HashMap<Character, Integer> dic, HashMap<Character, Integer> characters) {
-        for (Character char : characters.keySet()) {
-            if (!dic.containsKey(char)) return false;
-            if (dic.get(char) != characters.get(char)) return false;
-        }
-        return true;
+        return ans[0] == -1 ? "" : s.substring(ans[1], ans[2] + 1);
+
+
     }
 }

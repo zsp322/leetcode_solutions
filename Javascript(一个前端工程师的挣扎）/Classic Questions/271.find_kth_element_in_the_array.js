@@ -39,23 +39,6 @@ const partitionArray = function(nums, k, start, end) {
 }
 
 
-
-if (start >= end) return nums[k];
-
-let left = start;
-let right = end;
-let pivot = nums[Math.floor(start + end) / 2];
-
-while (left <= right) {
-   while (left <= right && nums[left] < pivot) left++;
-   while (left <= right && nums[right] > pivot) right--;
-
-   if (left <= right) swap, left--; right++
-}
-
-if (k <= right)
-
-
 // 二刷
 
 const partitionArray2 = function(nums, k, start, end) {

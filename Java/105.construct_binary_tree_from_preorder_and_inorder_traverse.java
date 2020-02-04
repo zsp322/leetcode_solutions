@@ -7,6 +7,8 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+// 这个代码是一种精炼过后的SOLUTION，多揣摩多模仿
+//
 class Solution {
     int preIdx = 0;
     int[] preorder;

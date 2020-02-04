@@ -16,14 +16,14 @@ var inorderTraversal = function(root) {
 
     let cur = root;
     while (cur != null || stack.length > 0) {
-      while (cur.left != null) {
-        stack.push(cur);
-        cur = cur.left;
-      }
+        while (cur != null) {
+            stack.push(cur);
+            cur = cur.left;
+        }
 
-      cur = stack.pop();
-      res.add(cur.val);
-      cur = cur.right;
+        cur = stack.pop();
+        res.push(cur.val);
+        cur = cur.right;
     }
 
     return res;

@@ -44,3 +44,11 @@ class Solution {
         return res;
     }
 }
+
+
+
+class Solution {
+    public int maxProduct(int[] nums) {
+
+    }
+}

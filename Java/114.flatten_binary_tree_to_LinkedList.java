@@ -47,6 +47,7 @@ class Solution {
 
 // Iterative Solution
 // Come from Post-order Traverse Solution
+// 这个iterative解法不好想
 class Solution {
     public void flatten(TreeNode root) {
         if (root == null) return;

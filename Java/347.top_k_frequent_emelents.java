@@ -98,3 +98,20 @@ class Solution {
     }
 }
 
+// Quick Select Solution
+class Solution {
+    public List<Integer> topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int n : nums) {
+            map.put(n, map.getOrDefault(n, 0) + 1);
+        }
+
+        return quickSelect(map, new ArrayList<Integer>(map.keySet()), 0, map.size() - 1, k);
+    }
+
+    public List<Integer> quickSelect(HashMap<Integer, Integer> map, ArrayList<Integer> keys, int start, int end, int k) {
+        int left = start, right = end;
+    }
+}
+

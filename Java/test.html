@@ -1,0 +1,59 @@
+<script>
+    // const x = {};
+    // x['foo'] = 'bar';
+    // x.bar = {
+    //     'first': 100,
+    //     'second': 200
+    // }
+    // console.log(x.bar['first'] + x['bar'].second);
+    // function sayHi(fullName, callBack) {
+    //     console.log("123");
+    //     if (typeof callBack === 'function') callBack();
+    // }
+    // function sayBye(fullName, callBack) {
+    //     console.log("1234");
+    //     callBack();
+    // }
+    // function print(firstName, lastName, callBack) {
+    //     console.log("12345");
+    //     if (typeof callBack === 'function') callBack("tttt");
+    // }
+
+    // print('a', 'b', sayHi);
+
+    // function foo(a) {
+    //     let returnedValue = "";
+
+    //     try {
+    //         if (a === "bar") {
+    //             throw new Error("qux");
+    //         }
+    //         returnedValue = "try"
+    //     } catch(err) {
+    //         returnedValue = "catch";
+    //     } finally {
+    //         returnedValue= "finally";
+    //     }
+
+    //     return returnedValue;
+    // }
+
+    // console.log(foo("bar"));
+    // console.log(foo("zzz"));
+    const prom = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve("prom");
+        }, 1000);
+        setTimeout(() => {
+            reject(new Error("!PROM"));
+        }, 5000);
+    })
+    prom.then(function(arg) {
+        console.log(arg);
+        return new Promise((resolve, reject) => {
+            reject(new Error("!arg"))
+        }).catch((error) => {
+            console.log(error);
+        })
+    })
+</script>

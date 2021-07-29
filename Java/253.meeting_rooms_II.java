@@ -1,7 +1,6 @@
 // Date: 11-25-2019
 // Tag: Heap
 // 这道题在amazon面试的时候也做到了，是这道题的变种
-// 牛逼呀我，一次BUG FREE就跑通了
 
 class Solution {
     public int minMeetingRooms(int[][] intervals) {
